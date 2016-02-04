@@ -1,0 +1,7 @@
+---
+
+db: managedwp
+
+db_user: managedwp
+
+wp_site_name: Managed WP
