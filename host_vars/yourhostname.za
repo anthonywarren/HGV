@@ -1,0 +1,7 @@
+---
+
+db: wordpress
+
+db_user: wpuser
+
+wp_site_name: Mercury Site
