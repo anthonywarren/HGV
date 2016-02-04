@@ -21,48 +21,73 @@
 - name: "Download and install WordPress for {{ enviro }}"
   command: /usr/local/bin/wp core download --path={{ wp_doc_root}}/{{ inventory_hostname }}
   sudo: yes
-  sudo_user: "{{ web_user }}"- name: Fetch random salts for WordPress config
+  sudo_user: "{{ web_user }}"
+
+- name: Fetch random salts for WordPress config
   local_action: command curl https://api.wordpress.org/secret-key/1.1/salt/
   register: "wp_salt"
   sudo: no
 
 - name: "Create wp-config for {{ enviro }}"
   template: src=wp/wp-config.php dest={{ wp_doc_root }}/{{ inventory_hostname }}/wp-config.php owner={{ web_user }} group={{ web_group }}
+
 - name: "Localconfig for {{ enviro }} WordPress"
-  template: src=wp/local-config.php dest={{ wp_doc_root }}/{{ inventory_hostname }}/local-config.php owner={{ web_user }} group={{ web_group }}- name: "Run the WP install for {{ enviro }}"
+  template: src=wp/local-config.php dest={{ wp_doc_root }}/{{ inventory_hostname }}/local-config.php owner={{ web_user }} group={{ web_group }}
+  
+  - name: "Run the WP install for {{ enviro }}"
   command: /usr/local/bin/wp core install --url={{ inventory_hostname }} --title="{{ wp_site_name }}" --admin_user=system --admin_password=Craig020308 --admin_email="admin@ijustmetyou.co.za"
   sudo: yes
   sudo_user: "{{ web_user }}"
   args:
-      chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"- name: "Run the WP W3 Total Cache Plugin for {{ enviro }}"  command: /usr/local/bin/wp plugin install w3-total-cache --activate --url={{ inventory_hostname }}"
+  chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"
+      
+  - name: "Run the WP W3 Total Cache Plugin for {{ enviro }}"
+  command: /usr/local/bin/wp plugin install w3-total-cache --activate --url={{ inventory_hostname }}
   sudo: yes
   sudo_user: "{{ web_user }}"
   args:
-      chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"- name: "Run the Ewww Image Optimizer Plugin for {{ enviro }}"  command: /usr/local/bin/wp plugin install ewww-image-optimizer --activate --url={{ inventory_hostname }}"
+  chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"
+      
+  - name: "Run the Ewww Image Optimizer Plugin for {{ enviro }}"
+  command: /usr/local/bin/wp plugin install ewww-image-optimizer --activate --url={{ inventory_hostname }}
   sudo: yes
   sudo_user: "{{ web_user }}"
   args:
-      chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"- name: "Run the Yoast SEO Plugin for {{ enviro }}"  command: /usr/local/bin/wp plugin install wordpress-seo --activate --url={{ inventory_hostname }}"
+  chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"
+      
+  - name: "Run the Yoast SEO Plugin for {{ enviro }}"
+  command: /usr/local/bin/wp plugin install wordpress-seo --activate --url={{ inventory_hostname }}
   sudo: yes
   sudo_user: "{{ web_user }}"
   args:
-      chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"- name: "Run the iTheme Security Plugin for {{ enviro }}"  command: /usr/local/bin/wp plugin install better-wp-security --activate --url={{ inventory_hostname }}"
+  chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"
+      
+  - name: "Run the iTheme Security Plugin for {{ enviro }}"
+  command: /usr/local/bin/wp plugin install better-wp-security --activate --url={{ inventory_hostname }}
   sudo: yes
   sudo_user: "{{ web_user }}"
   args:
-      chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"- name: "Run the User Role Editor Plugin for {{ enviro }}"  command: /usr/local/bin/wp plugin install user-role-editor --activate --url={{ inventory_hostname }}"
+  chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"
+      
+  - name: "Run the User Role Editor Plugin for {{ enviro }}"
+  command: /usr/local/bin/wp plugin install user-role-editor --activate --url={{ inventory_hostname }}
   sudo: yes
   sudo_user: "{{ web_user }}"
   args:
-      chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"- name: "Run the White Label CMS Plugin for {{ enviro }}"  command: /usr/local/bin/wp plugin install white-label-cms --activate --url={{ inventory_hostname }}"
+  chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"
+      
+  - name: "Run the White Label CMS Plugin for {{ enviro }}"
+  command: /usr/local/bin/wp plugin install white-label-cms --activate --url={{ inventory_hostname }}
   sudo: yes
   sudo_user: "{{ web_user }}"
   args:
-      chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"- name: "Run the Hide Plugin for {{ enviro }}"  command: /usr/local/bin/wp plugin install hide-plugins --activate --url={{ inventory_hostname }}"
+  chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"
+      
+  - name: "Run the Hide Plugin for {{ enviro }}"
+  command: /usr/local/bin/wp plugin install hide-plugins --activate --url={{ inventory_hostname }}
   sudo: yes
   sudo_user: "{{ web_user }}"
   args:
-      chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"
-
+  chdir: "{{ wp_doc_root }}/{{ inventory_hostname }}"
 
 
