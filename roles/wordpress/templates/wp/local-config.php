@@ -7,7 +7,7 @@ define('DB_NAME', '{{ db }}');
 define('DB_USER', '{{ db_user }}');
 
 /** MySQL database password */
-define('DB_PASSWORD', '{{ db_user_password }}');
+define('DB_PASSWORD', 'secret');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
